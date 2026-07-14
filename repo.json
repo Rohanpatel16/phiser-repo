@@ -1,0 +1,9 @@
+{
+  "name": "Phisher-Repo",
+  "packageName": "com.phisher.repo",
+  "description": "SkyStream plugins repository",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/USER_NAME/REPO_NAME/main/dist/plugins.json"
+  ]
+}

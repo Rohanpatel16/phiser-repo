@@ -1,0 +1,16 @@
+{
+  "packageName": "com.phisher.repo.allmovielandprovider",
+  "name": "AllMovieLandProvider",
+  "version": 1,
+  "baseUrl": "https://example.com",
+  "description": "AllMovieLandProvider plugin (Sky Gen 2)",
+  "authors": [
+    "Phisher98"
+  ],
+  "languages": [
+    "en"
+  ],
+  "categories": [
+    "Others"
+  ]
+}

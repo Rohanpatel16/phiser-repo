@@ -1,0 +1,16 @@
+{
+  "packageName": "com.phisher.repo.allwish",
+  "name": "AllWish",
+  "version": 1,
+  "baseUrl": "https://example.com",
+  "description": "AllWish plugin for Phisher-Repo",
+  "authors": [
+    "Developer"
+  ],
+  "languages": [
+    "en"
+  ],
+  "categories": [
+    "Others"
+  ]
+}
