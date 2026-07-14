@@ -9,29 +9,28 @@
     }
 
     async function fetch(url, options = {}) {
+        const method = (options.method || 'GET').toUpperCase();
+        const headers = options.headers || {};
+        
+        let res;
         try {
-            const config = {
-                url: url,
-                method: options.method || 'GET',
-                headers: options.headers || {},
-                data: options.body
-            };
-            const res = await axios(config);
-            return {
-                text: async () => typeof res.data === 'string' ? res.data : JSON.stringify(res.data),
-                json: async () => typeof res.data === 'string' ? JSON.parse(res.data) : res.data,
-                status: res.status
-            };
-        } catch (e) {
-            if (e.response) {
-                return {
-                    text: async () => typeof e.response.data === 'string' ? e.response.data : JSON.stringify(e.response.data),
-                    json: async () => typeof e.response.data === 'string' ? JSON.parse(e.response.data) : e.response.data,
-                    status: e.response.status
-                };
+            if (method === 'POST') {
+                res = await http_post(url, headers, options.body || "");
+            } else {
+                res = await http_get(url, headers);
             }
+        } catch (e) {
+            console.error("fetch failed", e);
             throw e;
         }
+
+        if (!res) res = { status: 500, body: "" };
+
+        return {
+            status: res.status,
+            text: async () => res.body,
+            json: async () => JSON.parse(res.body)
+        };
     }
 
     async function getHome(cb) {
