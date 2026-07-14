@@ -8,6 +8,32 @@
         return url;
     }
 
+    async function fetch(url, options = {}) {
+        try {
+            const config = {
+                url: url,
+                method: options.method || 'GET',
+                headers: options.headers || {},
+                data: options.body
+            };
+            const res = await axios(config);
+            return {
+                text: async () => typeof res.data === 'string' ? res.data : JSON.stringify(res.data),
+                json: async () => typeof res.data === 'string' ? JSON.parse(res.data) : res.data,
+                status: res.status
+            };
+        } catch (e) {
+            if (e.response) {
+                return {
+                    text: async () => typeof e.response.data === 'string' ? e.response.data : JSON.stringify(e.response.data),
+                    json: async () => typeof e.response.data === 'string' ? JSON.parse(e.response.data) : e.response.data,
+                    status: e.response.status
+                };
+            }
+            throw e;
+        }
+    }
+
     async function getHome(cb) {
         try {
             const res = await fetch(mainUrl + "/");
